@@ -18,7 +18,7 @@ typedef enum
 }RobotState_t;
 
 
-
+void CONTROL_Init(void);
 void TASK_Control(void*);
 void TASK_UpateState(void*);
 #endif /* CONTROL_H_ */

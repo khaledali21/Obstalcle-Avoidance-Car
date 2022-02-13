@@ -24,7 +24,7 @@ uint8_t US_u8Trigger(USElement_t* USDefinition)
 	DIO_u8SetPinData(USDefinition->US_PORT,USDefinition->TriggerPin,DIO_LOW);
 }
 
-uint8_t US_u8GetDistance(USElement_t* USDefinition,uint16_t* u8Distance)
+uint8_t US_u8GetDistance(USElement_t* USDefinition,uint8_t* u8Distance)
 {
 	if (u8Distance!=NULL)
 	{
