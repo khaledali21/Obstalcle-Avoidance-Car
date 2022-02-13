@@ -8,9 +8,7 @@
 #include "EXTI_prv.h"
 #include "EXTI.h"
 
-
 void (*gv_EXTCallBackFun)(void)=NULL;
-
 
 uint8_t EXTI_u8Enable(EXTINumber_t u8InterruptNumber, EXTITiggerType_t u8InterruptTrigger, void (*vCallBackFun)(void))
 {

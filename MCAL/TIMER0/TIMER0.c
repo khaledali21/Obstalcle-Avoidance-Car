@@ -8,7 +8,7 @@
 #include "TIMER0_interface.h"
 #include "TIMER0_cfg.h"
 #include "TIMER0_prv.h"
-
+#include "../../ECUAL/LED/LED.h"
 static volatile TIM0_Config_t*	gst_TIM0Config= NULL;
 void (*gv_OVFCallBackFun)(void)=NULL;
 void (*gv_OC0CallBackFun)(void)=NULL;
@@ -17,7 +17,7 @@ void (*gv_OC0CallBackFun)(void)=NULL;
 ErrorState_t TIM0_u8Init(TIM0_Config_t * pst_TIMConfig)
 {
 	uint8_t u8ErrorState=TIM0_OK;
-
+	
 	//check if the input pointer is not a pointer to null first
 	if (pst_TIMConfig != NULL)
 	{
@@ -165,6 +165,7 @@ ErrorState_t TIM0_u8EnableOCInterrupt (void (*vCallBackFun)(void))
 ErrorState_t TIM0_u8TimerStart(void)
 {
 	uint8_t u8ErrorState = TIM0_OK;
+	
 	if (gst_TIM0Config != NULL)
 	{
 		//check if the timer is initialized
@@ -179,7 +180,7 @@ ErrorState_t TIM0_u8TimerStart(void)
 		case NO_PRESCALAR:// if the clock mode is chosen as NO_PRESCALAR we set the CS(0:2) BITS to 1
 			SET_BIT(TCCR0_REG, CS00_BIT);
 			CLR_BIT(TCCR0_REG, CS01_BIT);
-			CLR_BIT(TCCR0_REG, CS02_BIT);
+			CLR_BIT(TCCR0_REG, CS02_BIT);		
 			break;
 		case PRESCALAR_8:// if the clock mode is chosen as PRESCALAR_8 we set the CS(0:2) BITS to 2
 			CLR_BIT(TCCR0_REG, CS00_BIT);
@@ -268,7 +269,6 @@ ErrorState_t TIM0_u8Deinit(void)
 	}
 	return u8ErrorState;
 }
-
 
 void __vector_10(void){
 

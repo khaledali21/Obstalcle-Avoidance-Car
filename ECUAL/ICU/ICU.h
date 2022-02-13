@@ -18,6 +18,7 @@
 
 
 uint8_t ICU_init();
+uint8_t ICU_Read(uint8_t* pu8PeriodReader);
 void ICU_vidCalculation();
 
 #endif /* ECUAL_ICU_ICU_H_ */
