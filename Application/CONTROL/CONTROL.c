@@ -17,6 +17,7 @@ LED_t led1 = {PORTB, PIN5};
 LED_t led2 = {PORTB, PIN6};
 LED_t led3 = {PORTB, PIN7};
 extern USElement_t US;
+uint16_t distance;
 void CONTROL_Init(void){
 	LED_u8Init(&led0);
 	LED_u8Init(&led1);
@@ -60,41 +61,42 @@ void TASK_Control(void* vptr){
 
 
 void TASK_UpateState(void* vptr){
-	uint8_t distance;
 	US_u8GetDistance(&US, &distance);
 	switch(robotState){
 		case  MOVE_FORWARD_FAST:
-		if(distance < 50 && distance >= 30){
+		if(distance < 70 && distance >= 30){
 			robotState = MOVE_FORWARD_SLOW;
 		}
 		else if(distance < 30){
-			DRIVE_u8Mode(MODE1);
 			robotState = MOVE_BACKWARD;
 		}
 		break;
 		case MOVE_FORWARD_SLOW:
-		if(distance >= 50){
+		if(distance >= 100){
 			robotState = MOVE_FORWARD_FAST;
 		}
-		else if(distance == 30){
-			robotState = MOVE_RIGHT;
-		}
 		else if(distance < 30){
-			DRIVE_u8Mode(MODE1);
 			robotState = MOVE_BACKWARD;
 		}
 		break;
 		case MOVE_RIGHT:
-		if(distance >= 50){
-			robotState = MOVE_FORWARD_FAST;
+		if(distance >= 70){
+			robotState = MOVE_FORWARD_SLOW;
+		}
+		else if(distance < 30){
+			robotState = MOVE_BACKWARD;
 		}
 		break;
 		case MOVE_BACKWARD:
-		if(distance >= 30){
+		if(distance >= 50){
 			robotState = MOVE_RIGHT;
 		}
 		break;
 		default:
 		break;
 	}
+}
+void TASK_PrintDistance(void* vptr){
+	LCD_u8SendCommand(LCD_CLEAR);
+	LCD_u8SendNumber(distance);
 }

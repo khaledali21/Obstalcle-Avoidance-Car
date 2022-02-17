@@ -1,4 +1,4 @@
-/*
+	/*
  * Obstacle-Avoidance-Car.c
  *
  * Created: 2/13/2022 12:37:15 PM
@@ -28,5 +28,6 @@ int main(void)
 	OS_AddTask(TASK_TriggerUS, 1, 5, NULL);	
 	OS_AddTask(TASK_Control, 2, 10, NULL);
 	OS_AddTask(TASK_UpateState, 3, 10, NULL);
+	OS_AddTask(TASK_PrintDistance, 4, 500, NULL);
 	OS_Start();
 }

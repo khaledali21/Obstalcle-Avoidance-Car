@@ -21,4 +21,5 @@ typedef enum
 void CONTROL_Init(void);
 void TASK_Control(void*);
 void TASK_UpateState(void*);
+void TASK_PrintDistance(void*);
 #endif /* CONTROL_H_ */

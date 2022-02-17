@@ -33,7 +33,7 @@ uint8_t MOTOR_Move(MotorDef_t* MotorElement,uint8_t MotorSpeed,uint8_t MotorDir)
 {
 	uint8_t u8ErrorState = STD_TYPES_OK;
 
-	if (MotorElement!=NULL && MotorSpeed > 0 && MotorSpeed <100)
+	if (MotorElement !=NULL && MotorSpeed > 0 && MotorSpeed < 100)
 	{
 		switch (MotorDir)
 		{
@@ -44,9 +44,9 @@ uint8_t MOTOR_Move(MotorDef_t* MotorElement,uint8_t MotorSpeed,uint8_t MotorDir)
 			PWM_u8DutyCycle(MotorElement->ChannelNum,MotorSpeed);
 			break;
 		case ANTI_CLOCKWISE:
-			DIO_u8SetPinData(MotorElement->port , MotorElement->DirPinA, DIO_LOW);
 			DIO_u8SetPinData(MotorElement->port , MotorElement->DirPinB, DIO_HIGH);
-			PWM_u8DutyCycle(MotorElement->ChannelNum,MotorSpeed);
+			DIO_u8SetPinData(MotorElement->port , MotorElement->DirPinA, DIO_LOW);
+			PWM_u8DutyCycle(MotorElement->ChannelNum, MotorSpeed);
 			break;
 		default:
 			u8ErrorState = STD_TYPES_NOK;
