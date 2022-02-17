@@ -61,6 +61,7 @@ void TASK_Control(void* vptr){
 
 
 void TASK_UpateState(void* vptr){
+	distance = 0;
 	US_u8GetDistance(&US, &distance);
 	switch(robotState){
 		case  MOVE_FORWARD_FAST:

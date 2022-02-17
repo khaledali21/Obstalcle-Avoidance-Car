@@ -8,7 +8,7 @@
 
 #include "US.h"
 #include "../LCD/LCD.h"
-#define US_TIMER_TICK_TIMER 128
+#define US_TIMER_TICK_TIMER 128UL
 
 uint8_t US_u8Init(USElement_t* USDefinition)
 {
@@ -24,14 +24,12 @@ uint8_t US_u8Trigger(USElement_t* USDefinition)
 	DIO_u8SetPinData(USDefinition->US_PORT,USDefinition->TriggerPin,DIO_LOW);
 }
 
-uint8_t US_u8GetDistance(USElement_t* USDefinition,uint16_t* u8Distance)
+uint8_t US_u8GetDistance(USElement_t* USDefinition,uint16_t* u16Distance)
 {
-	if (u8Distance!=NULL)
+	if (u16Distance!=NULL)
 	{
-		ICU_Read((uint8_t*) u8Distance);
-		float f32Distance = *u8Distance;
-		
-		*u8Distance = ((US_TIMER_TICK_TIMER * (f32Distance)) / 58UL);
+		ICU_Read((uint8_t*) u16Distance);		
+		*u16Distance = ((US_TIMER_TICK_TIMER * (*u16Distance)) / 58UL);
 	}else
 	{
 		//NOP
